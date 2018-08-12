@@ -63,16 +63,21 @@ pipeline {
                         reportTitles: "PMD Report Test",
                         reportName: "PMD Test"
                         ]) 
-               }
+               } 
            }
            
        } 
-      // stage('CodeQuality') {
-       //    steps {
-        //       echo 'CodeQuality..'
-         //   sh './gradlew clean sonarqube'
-          // }
-       //}       
+       success {
+                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+             } 
+             
+       stage('CodeQuality') {
+           steps {
+               echo 'CodeQuality..'
+            sh './gradlew clean sonarqube'
+           }
+       }       
    }
+    
 }
 		   
