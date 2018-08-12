@@ -1,0 +1,83 @@
+plugins {
+    id "org.sonarqube" version "2.6.2"
+}
+
+apply plugin: "jacoco"
+apply plugin: 'java'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'jdepend'
+
+
+group = 'com.alibaba.boot'
+version = '1.0.0.RELEASE'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+configurations.all {
+}
+
+repositories {
+
+    mavenCentral()
+}
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version:'5.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version:'5.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version:'5.0.6.RELEASE'
+    compile group: 'com.alibaba.spring', name: 'spring-webmvc-support', version:'1.0.0.RELEASE'
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.2.RELEASE'
+    testCompile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version:'3.0.9.RELEASE'
+    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
+}
+
+jacoco {
+    toolVersion = "0.8.1"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/reports/jacoco")
+    }
+}
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+            'java-basic',
+            'java-braces',
+            'java-codesize',
+            'java-comments',
+            'java-design',
+            'java-empty',
+            'java-imports',
+            'java-strings',
+            'java-unnecessary',
+            'java-unusedcode'
+    ]
+    toolVersion = '6.0.0'
+}
+
+findbugs{
+    ignoreFailures=true
+    findbugsTest.enabled=true
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
