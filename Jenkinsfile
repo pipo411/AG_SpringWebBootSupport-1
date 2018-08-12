@@ -64,13 +64,13 @@ pipeline {
                         reportName: "PMD Test"
                         ]) 
                } 
+                success {
+                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+             } 
            }
            
        } 
-       success {
-                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-             } 
-             
+
        stage('CodeQuality') {
            steps {
                echo 'CodeQuality..'
