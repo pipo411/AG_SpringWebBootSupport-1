@@ -5,8 +5,8 @@ pipelines:
     group: SpringSupport
     materials:
       repo:
-        git: https://github.com/pipo411/AG_SpringWebBootSupport.git
-        branch: master
+        git: https://github.com/pipo411/AG_SpringWebBootSupport-1.git
+        branch: gocd
     stages:
       - Build:
           jobs:
