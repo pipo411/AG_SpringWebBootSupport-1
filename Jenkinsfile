@@ -18,6 +18,7 @@ pipeline {
            post{
                success{
                    junit 'build/test-results/test/*.xml'
+                   archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
                    publishHTML (target: [
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
@@ -64,20 +65,15 @@ pipeline {
                         reportName: "PMD Test"
                         ]) 
                } 
-                success {
-                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-             } 
            }
            
        } 
-
        stage('CodeQuality') {
            steps {
-               echo 'CodeQuality..'
+            echo 'CodeQuality..'
             sh './gradlew clean sonarqube'
            }
        }       
    }
-    
 }
 		   
