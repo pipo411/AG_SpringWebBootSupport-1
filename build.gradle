@@ -1,5 +1,6 @@
 plugins {
     id "org.sonarqube" version "2.6.2"
+    id "com.jonaslasauskas.capsule" version "0.3.0"
 }
 
 apply plugin: "jacoco"
@@ -81,3 +82,9 @@ tasks.withType(FindBugs) {
     }
 }
 
+capsule {
+    capsuleManifest {
+        applicationId = 'AnnotationConfigWebApplicationContext'
+        applicationClass = 'com.alibaba.boot.web.BootApplication'
+    }
+}
