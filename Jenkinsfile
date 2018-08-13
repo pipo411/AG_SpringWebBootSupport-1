@@ -32,6 +32,15 @@ pipeline {
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
+                        reportDir: 'build/reports/jacoco/',
+                        reportFiles: 'index.html',
+                        reportTitles: "Coverage",
+                        reportName: "JacocoReports"
+                         ])     
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
                         reportDir: 'build/reports/findbugs',
                         reportFiles: 'main.html',
                         reportTitles: "Bugs Report Main",

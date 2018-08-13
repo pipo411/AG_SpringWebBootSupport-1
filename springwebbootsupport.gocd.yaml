@@ -1,0 +1,70 @@
+format_version: 3
+pipelines:
+  spring-web-boot-support:
+    lock_behavior: lockOnFailure
+    group: SpringSupport
+    materials:
+      repo:
+        git: https://github.com/pipo411/AG_SpringWebBootSupport-1.git
+        branch: gocd
+    stages:
+      - Build:
+          jobs:
+            Building:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - assemble  
+              artifacts:
+                - build:
+                    source: build/libs/*.jar
+                    destination: buildJar   
+      - Test:
+          jobs:
+            Unit_Test:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - test
+                      - jacocoTestReport
+                      - check
+              artifacts:
+                - build:
+                    source: build/reports/tests/test/**/*
+                    destination: html
+                - test:
+                    source: build/test-results/test/*.xml
+                    destination: xml
+                - build:
+                    source: build/reports/jacoco/**/*
+                    destination: coverage
+                - build:
+                    source: build/reports/findbugs/*.html
+                    destination: bugs
+                - build:
+                    source: build/reports/pmd/*.html
+                    destination: pmd     
+              tabs:
+                unit_test: xml/index.html
+                htmlReports: html/index.html
+                bugs_main: bugs/main.html
+                bugs_test: bugs/test.html
+                pmd_main: pmd/main.html
+                pmd_test: pmd/test.html
+                coverage: coverage/index.html
+                
+      - CodeQuality:
+          jobs:
+            CodeQuality:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - sonarqube  
+                  
+      
