@@ -91,7 +91,7 @@ pipelines:
                       - deploy
                       - -Pdev_server=10.28.135.36
                       - -Puser_server=ubuntu
-                      - -Pwar_path=Capsule
+                      - -Pjar_path=Capsule
                       - -Puser_home=/home/go/llavedocker.pem
                                     
       
