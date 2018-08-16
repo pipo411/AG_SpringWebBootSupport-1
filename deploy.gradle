@@ -1,0 +1,27 @@
+plugins {
+  id 'org.hidetake.ssh' version '2.9.0'
+}
+
+remotes {
+  webServer {
+    host = dev_server
+    user = user_server
+    identity = file("C:\\Users\\Administrator\\Desktop\\KEY\\llavedocker.pem")
+  }
+}
+
+task deploy {
+  doLast {
+    ssh.run {
+      session(remotes.webServer) {
+        execute 'sudo service tomcat stop'
+        execute " rm -rf /home/ubuntu/artifact", ignoreError: true
+        execute " mkdir /home/ubuntu/artifact"
+        put from: "build/libs/spring-boot-web-support-1.0.0.RELEASE-capsule.jar", into: "/home/ubuntu/artifact"
+        execute 'java -jar /home/ubuntu/artifact/spring-boot-web-support-1.0.0.RELEASE-capsule.jar'
+      }
+    }
+  }
+}
+
+
