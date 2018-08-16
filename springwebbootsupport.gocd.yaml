@@ -61,7 +61,6 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - sonarqube 
-
       - Package:
           jobs:
             CapsuleJar:
@@ -75,15 +74,15 @@ pipelines:
                 - build:
                     source: build/libs/*.jar
                     destination: Capsule
-       - Deploy:
+
+      - Deploy:
           jobs:
-            deploying: 
+            Deploying: 
               tasks:
                 - fetch:
-                   stage: Package
-                   job: CapsuleJar
-                   source: Capsule/
-
+                    stage: Package
+                    job: CapsuleJar
+                    source: Capsule/
                 - exec:
                     command: ./gradlew
                     arguments:
