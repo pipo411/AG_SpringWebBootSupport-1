@@ -6,7 +6,7 @@ pipelines:
     materials:
       repo:
         git: https://github.com/pipo411/AG_SpringWebBootSupport-1.git
-        branch: task11
+        branch: deploy
     stages:
       - Build:
           jobs:
