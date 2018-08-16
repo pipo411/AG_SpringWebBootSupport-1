@@ -18,7 +18,6 @@ pipeline {
            post{
                success{
                    junit 'build/test-results/test/*.xml'
-                   archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
                    publishHTML (target: [
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
@@ -36,7 +35,7 @@ pipeline {
                         reportFiles: 'index.html',
                         reportTitles: "Coverage",
                         reportName: "JacocoReports"
-                         ])     
+                         ])   
                     publishHTML (target: [
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
@@ -82,7 +81,18 @@ pipeline {
             echo 'CodeQuality..'
             sh './gradlew clean sonarqube'
            }
-       }       
+       }  
+       stage('Package') {
+           steps {
+            echo 'PackageJar..'
+            sh './gradlew build capsule'
+           }
+           post{
+               success{
+                   archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+               }
+           }
+       } 
    }
 }
 		   
