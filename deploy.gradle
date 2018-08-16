@@ -6,7 +6,7 @@ remotes {
   webServer {
     host = dev_server
     user = user_server
-    identity = file("C:\\Users\\Administrator\\Desktop\\KEY\\llavedocker.pem")
+    identity = file(user_home)
   }
 }
 
