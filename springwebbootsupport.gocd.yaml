@@ -75,7 +75,6 @@ pipelines:
                 - build:
                     source: build/libs/*.jar
                     destination: Capsule
-
        - Deploy:
           jobs:
             deploying: 

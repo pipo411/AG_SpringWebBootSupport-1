@@ -18,7 +18,7 @@ task deploy {
         execute "rm -rf /home/ubuntu/artifact", ignoreError: true
         execute "mkdir /home/ubuntu/artifact"
         put from: "build/libs/spring-boot-web-support-1.0.0.RELEASE-capsule.jar", into: "/home/ubuntu/artifact"
-        execute 'java -jar /home/ubuntu/artifact/spring-boot-web-support-1.0.0.RELEASE-capsule.jar'
+        execute 'nohup java -jar /home/ubuntu/artifact/spring-boot-web-support-1.0.0.RELEASE-capsule.jar &'
       }
     }
   }
