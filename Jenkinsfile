@@ -79,7 +79,7 @@ pipeline {
        stage('CodeQuality') {
            steps {
             echo 'CodeQuality..'
-            sh './gradlew clean sonarqube'
+            sh './gradlew  sonarqube'
            }
        }  
        stage('Package') {
@@ -93,6 +93,12 @@ pipeline {
                }
            }
        } 
+       stage('Deploy'){
+           steps{
+               echo 'Deploy..'
+                sh'./gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.36 -Puser_server=ubuntu -Puser_home=/home/llavedocker.pem'
+           }
+       }
    }
 }
 		   

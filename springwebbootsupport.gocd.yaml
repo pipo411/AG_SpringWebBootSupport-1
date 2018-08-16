@@ -6,7 +6,7 @@ pipelines:
     materials:
       repo:
         git: https://github.com/pipo411/AG_SpringWebBootSupport-1.git
-        branch: deploy
+        branch: deploy-jenkins
     stages:
       - Build:
           jobs:
@@ -16,7 +16,8 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - clean
-                      - assemble    
+                      - assemble  
+
       - Test:
           jobs:
             Unit_Test:
@@ -24,7 +25,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - test
                       - jacocoTestReport
                       - check
@@ -60,7 +60,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - sonarqube 
       - Package:
           jobs:
@@ -69,11 +68,30 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - build
                       - capsule                  
               artifacts:
                 - build:
                     source: build/libs/*.jar
-                    destination: Capsule     
+                    destination: Capsule
+
+      - Deploy:
+          jobs:
+            Deploying: 
+              tasks:
+                - fetch:
+                    stage: Package
+                    job: CapsuleJar
+                    source: Capsule/
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - -b
+                      - deploy.gradle
+                      - deploy
+                      - -Pdev_server=10.28.135.36
+                      - -Puser_server=ubuntu
+                      - -Pjar_path=Capsule
+                      - -Puser_home=/home/go/llavedocker.pem
+                                    
       
