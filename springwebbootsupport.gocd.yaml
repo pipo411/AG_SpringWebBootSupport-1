@@ -16,7 +16,8 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - clean
-                      - assemble    
+                      - assemble  
+
       - Test:
           jobs:
             Unit_Test:
@@ -60,6 +61,7 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - sonarqube 
+
       - Package:
           jobs:
             CapsuleJar:
@@ -73,13 +75,14 @@ pipelines:
                 - build:
                     source: build/libs/*.jar
                     destination: Capsule
+
        - Deploy:
           jobs:
-            analyzing: 
+            deploying: 
               tasks:
                 - fetch:
                    stage: Package
-                   job: capsule_package
+                   job: CapsuleJar
                    source: Capsule/
 
                 - exec:
