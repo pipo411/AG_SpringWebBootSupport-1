@@ -5,8 +5,8 @@ pipelines:
     group: SpringSupport
     materials:
       repo:
-        git: https://github.com/pipo411/AG_SpringWebBootSupport-1.git
-        branch: reports-jenkins
+        git: https://github.com/devops-at06/AG_SpringWebBootSupport.git
+        branch: master
     stages:
       - Build:
           jobs:
