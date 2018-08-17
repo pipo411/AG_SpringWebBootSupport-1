@@ -102,7 +102,7 @@ pipeline {
        stage('Acceptance'){
            steps{
                echo 'Acceptance..'
-                sh'./acceptance/gradlew clean test cucumber allureReport -p acceptance'
+                sh'./acceptance/gradlew clean test cucumber -p acceptance'
            }
            post{
                success{
@@ -124,16 +124,7 @@ pipeline {
                         reportFiles: 'index.html',
                         reportTitles: "Cucumber ",
                         reportName: "Cucumber Sum"
-                        ])
-                    publishHTML (target: [
-                        allowMissing: true,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: 'acceptance/build/reports/allure-results',
-                        reportFiles: 'index.html',
-                        reportTitles: "Allure ",
-                        reportName: "Allure Reports"
-                        ])    
+                        ])  
                }
            }
        }
