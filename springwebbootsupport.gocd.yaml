@@ -109,7 +109,7 @@ pipelines:
                     source: acceptance/build/reports/cucumber-reports/cucumber-html-reports/*.html
                     destination: CucumberReport  
               tabs:
-                CucumberReport: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html
-                CucumberFeatures: CucumberReport/overview-features.html 
-                CucumberSteps: CucumberReport/overview-steps.html  
+                CuReport: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html
+                CuFeatures: CucumberReport/overview-features.html 
+                CuSteps: CucumberReport/overview-steps.html  
                 
