@@ -107,7 +107,7 @@ pipelines:
                       - acceptance                   
               artifacts:
                 - build:
-                    source: acceptance/build/reports/cucumber-reports/cucumber-html-reports/*.html
+                    source: acceptance/build/reports/cucumber-reports/cucumber-html-reports/
                     destination: CucumberReport  
               tabs:
                 Cucumber: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html

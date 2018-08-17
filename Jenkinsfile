@@ -110,7 +110,7 @@ pipeline {
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: 'acceptance/build/reports/cucumber-reports',
+                        reportDir: 'acceptance/build/reports/cucumber-reports/',
                         reportFiles: 'overview-features.html',
                         reportTitles: "Cucumber Features",
                         reportName: "Cucumber Features"
@@ -119,7 +119,7 @@ pipeline {
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: 'acceptance/build/reports/cucumber-reports',
+                        reportDir: 'acceptance/build/reports/cucumber-reports/',
                         reportFiles: 'overview-steps.html',
                         reportTitles: "Cucumber Steps",
                         reportName: "Cucumber Steps"
