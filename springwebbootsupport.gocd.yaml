@@ -110,6 +110,6 @@ pipelines:
                     destination: CucumberReport  
               tabs:
                 CucumberReport: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html
-                CucumberReport: CucumberReport/overview-features.html 
-                CucumberReport: CucumberReport/overview-steps.html  
+                CucumberFeatures: CucumberReport/overview-features.html 
+                CucumberSteps: CucumberReport/overview-steps.html  
                 
