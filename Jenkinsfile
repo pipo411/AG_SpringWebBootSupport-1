@@ -112,7 +112,7 @@ pipeline {
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
                         reportDir: 'acceptance/build/reports/cucumber-reports',
-                        reportFiles: 'report-feature_gradle-cucumber-gradle-feature.html',
+                        reportFiles: '*.html',
                         reportTitles: "Cucumber Reports",
                         reportName: "Cucumber Summary"
                         ])
