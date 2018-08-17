@@ -99,6 +99,44 @@ pipeline {
                 sh'./gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.36 -Puser_server=ubuntu -Puser_home=/home/llavedocker.pem'
            }
        }
+       stage('Acceptance'){
+           steps{
+               echo 'Acceptance..'
+                sh'./acceptance/gradlew clean test cucumber allureReport -p acceptance'
+           }
+           post{
+               success{
+                   junit 'acceptance/build/test-results/test/*.xml'
+                   publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/reports/cucumber-reports',
+                        reportFiles: 'report-feature_gradle-cucumber-gradle-feature.html',
+                        reportTitles: "Cucumber Reports",
+                        reportName: "Cucumber Summary"
+                        ])
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/reports/cucumber',
+                        reportFiles: 'index.html',
+                        reportTitles: "Cucumber ",
+                        reportName: "Cucumber Sum"
+                        ])
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/reports/allure-results',
+                        reportFiles: 'index.html',
+                        reportTitles: "Allure ",
+                        reportName: "Allure Reports"
+                        ])    
+               }
+           }
+       }
    }
 }
 		   
