@@ -102,15 +102,14 @@ pipelines:
                     arguments:
                       - clean
                       - test 
-                      - cucumber
                       - -p
                       - acceptance                   
               artifacts:
                 - build:
-                    source: acceptance/build/reports/cucumber-reports/cucumber-html-reports/
+                    source: acceptance/build/reports/cucumber-reports/cucumber-html-reports/*.html
                     destination: CucumberReport  
               tabs:
-                Cucumber: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html
-                htmlReports: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html                    
-                                    
-      
+                CucumberReport: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html
+                CucumberReport: CucumberReport/overview-features.html 
+                CucumberReport: CucumberReport/overview-steps.html  
+                

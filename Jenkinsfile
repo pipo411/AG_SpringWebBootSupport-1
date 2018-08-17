@@ -102,7 +102,7 @@ pipeline {
        stage('Acceptance'){
            steps{
                echo 'Acceptance..'
-                sh'./acceptance/gradlew clean test cucumber -p acceptance'
+                sh'./acceptance/gradlew clean test -p acceptance'
            }
            post{
                success{
@@ -110,7 +110,7 @@ pipeline {
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: 'acceptance/build/reports/cucumber-reports/',
+                        reportDir: 'acceptance/build/reports/cucumber-reports/cucumber-html-reports/',
                         reportFiles: 'overview-features.html',
                         reportTitles: "Cucumber Features",
                         reportName: "Cucumber Features"
@@ -119,7 +119,7 @@ pipeline {
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: 'acceptance/build/reports/cucumber-reports/',
+                        reportDir: 'acceptance/build/reports/cucumber-reports/cucumber-html-reports/',
                         reportFiles: 'overview-steps.html',
                         reportTitles: "Cucumber Steps",
                         reportName: "Cucumber Steps"
