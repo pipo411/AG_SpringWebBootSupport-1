@@ -6,7 +6,7 @@ pipelines:
     materials:
       repo:
         git: https://github.com/pipo411/AG_SpringWebBootSupport-1.git
-        branch: deploy-jenkins
+        branch: reports-jenkins
     stages:
       - Build:
           jobs:
@@ -93,5 +93,24 @@ pipelines:
                       - -Puser_server=ubuntu
                       - -Pjar_path=Capsule
                       - -Puser_home=/home/go/llavedocker.pem
+      - Acceptance:
+          jobs:
+            Acceptance:
+              tasks:
+                - exec:
+                    command: ./acceptance/gradlew
+                    arguments:
+                      - clean
+                      - test 
+                      - cucumber
+                      - -p
+                      - acceptance                   
+              artifacts:
+                - build:
+                    source: acceptance/build/libs/*.html
+                    destination: CucumberReport  
+              tabs:
+                Cucumber: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html
+                htmlReports: CucumberReport/report-feature_gradle-cucumber-gradle-feature.html                    
                                     
       
