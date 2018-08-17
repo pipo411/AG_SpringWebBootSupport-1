@@ -106,25 +106,15 @@ pipeline {
            }
            post{
                success{
-                   junit 'acceptance/build/test-results/test/*.xml'
                    publishHTML (target: [
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
                         reportDir: 'acceptance/build/reports/cucumber-reports',
-                        reportFiles: '*.html',
+                        reportFiles: 'report-feature_gradle-cucumber-gradle-feature.html',
                         reportTitles: "Cucumber Reports",
                         reportName: "Cucumber Summary"
-                        ])
-                    publishHTML (target: [
-                        allowMissing: true,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: 'acceptance/build/reports/cucumber',
-                        reportFiles: 'index.html',
-                        reportTitles: "Cucumber ",
-                        reportName: "Cucumber Sum"
-                        ])  
+                        ]) 
                }
            }
        }
