@@ -111,10 +111,19 @@ pipeline {
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
                         reportDir: 'acceptance/build/reports/cucumber-reports',
-                        reportFiles: 'report-feature_gradle-cucumber-gradle-feature.html',
-                        reportTitles: "Cucumber Reports",
-                        reportName: "Cucumber Summary"
+                        reportFiles: 'overview-features.html',
+                        reportTitles: "Cucumber Features",
+                        reportName: "Cucumber Features"
                         ]) 
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/reports/cucumber-reports',
+                        reportFiles: 'overview-steps.html',
+                        reportTitles: "Cucumber Steps",
+                        reportName: "Cucumber Steps"
+                        ])
                }
            }
        }
